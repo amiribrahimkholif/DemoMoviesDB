@@ -1,0 +1,28 @@
+<div class="w-75 m-auto">
+
+    <div *ngIf='error' class="alert alert-danger">
+        {{error}}
+    </div>
+    <form [formGroup]='loginForm' (ngSubmit)='submitLoginForm(loginForm)'>
+        <div class="form-group">
+            <label for="email">email</label>
+            <input formControlName='email' class="form-control" type="email" id="email">
+            <div *ngIf='loginForm.get("email")?.errors != null &&
+            loginForm.get("email")?.touched==true' class="alert alert-danger my-2">
+                <p *ngIf='loginForm.get("email")?.errors?.required'>email is required</p>
+                <p *ngIf='loginForm.get("email")?.errors?.email'>enter a valid email</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password">password</label>
+            <input formControlName='password' class="form-control" type="password" id="password">
+            <div *ngIf='loginForm.get("password")?.errors != null &&
+            loginForm.get("password")?.touched==true' class="alert alert-danger my-2">
+                <p *ngIf='loginForm.get("password")?.errors?.required'>password is required</p>
+                <p *ngIf='loginForm.get("password")?.errors?.pattern'>password must start with cap</p>
+            </div>
+        </div>
+        <button [disabled]='loginForm.invalid' class="btn btn-info" type="submit">login</button>
+    </form>
+
+</div>
